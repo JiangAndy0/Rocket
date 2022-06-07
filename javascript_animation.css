@@ -1,0 +1,136 @@
+
+
+.centered {
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 600px;
+    
+}
+
+#rocket-area {
+    background-color: blueviolet;
+    background-size: cover;
+    height: 600px;
+    overflow: hidden;
+}
+
+#rocket {
+    position: relative;
+    height: 300px;
+    width: auto;
+    top: 360px;
+    animation: flyin 2s ease-out forwards;
+}
+
+.progress-bar-area {
+    height: 100px;
+    align-items: center;
+}
+
+
+#progress-bar {
+    border: solid blueviolet;
+    height: 40px;
+    width: 300px;
+    display: flex;
+}
+
+#progress {
+    background-color: blueviolet;
+    width: 0%;
+}
+
+.button {
+    padding: 20px 30px;
+    border-radius: 40px;
+}
+
+#charge-button {
+    background-color: hsl(240, 30%, 30%);
+    color: white;
+}
+
+#charge-button:hover {
+    cursor:pointer;
+    background-color: hsl(0, 50%, 60%);
+}
+
+#reset-button {
+    border: solid hsl(240, 30%, 30%) 2px;
+    display: none;
+}
+
+#reset-button:hover {
+    cursor: pointer;
+    background-color: hsl(240, 30%, 30%);
+    color: white;
+}
+
+@keyframes flyaway {
+
+    0% {
+        top: 360px;
+    }
+
+    100% {
+        top: -350px;
+    }
+}
+
+@keyframes flyin {
+
+    0% {
+        top: 800px;
+    }
+
+    50% {
+        top: 200px;
+    }
+
+    100% {
+        top: 360px;
+    }
+}
+
+@keyframes shake {
+
+    from {
+        left: 0px;
+    }
+
+    25% {
+        left: 5px;
+    }
+
+    50% {
+        left: -5px;
+    }
+
+    100% {
+        left: 0px;
+    }
+}
+
+@keyframes shake2 {
+    
+    from {
+        left: 0px;
+    }
+
+    25% {
+        left: 5px;
+    }
+
+    50% {
+        left: -5px;
+    }
+
+    100% {
+        left: 0px;
+    }
+}
+
+
