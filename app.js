@@ -56,7 +56,7 @@ resetButton.addEventListener('click', resetRocket);
 //change the background image of the rocket area
 function changeBackground() {
     //array containing directories of background images
-    const backgroundImages = [' ', './resources/city-background1.jpg', './resources/forest_background_1.webp','./resources/forest_background_2.webp'];
+    const backgroundImages = [' ', './resources/city-1.jpg', './resources/forest-1.webp','./resources/forest-2.webp', './resources/mars.jpg'];
     //iterate background image index
     backgroundImageIndex++;
     if (backgroundImageIndex > backgroundImages.length - 1){
