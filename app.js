@@ -26,6 +26,8 @@ const imgPaths = [img1Path, img2Path, img3Path, img4Path, img5Path];
 
 //current thumbnail image is the first one
 let currentThumb = thumb1;
+//current image path is the first one
+let currentImgPath = img1Path;
 
 let progressPercent = 0;
 let evenIteration = true;
@@ -82,21 +84,28 @@ function changeImage( event ){
 
     //set new image thumbnail as current image thumbnail
     currentThumb = event.target;
+
+    //set new image behind rocket
+    let imageIndex = thumbs.indexOf(currentThumb);
+    rocketArea.style.backgroundImage = `url(${imgPaths[imageIndex]})`;
+    currentImgPath = imgPaths[imageIndex];
 }
 
-//activates on mouseover on thumbnails, changes opacity to 100%
+/*
+Activates on mouseover on thumbnails, changes opacity to 100%,
+*/
 function thumbMouseover( event ){
     event.target.style.opacity = '100%';
 }
 
-//activates on mouseout on thumbnails, changes opacity to 50%
+/*
+Activates on mouseout on thumbnails, changes opacity to 50%
+*/
 function thumbMouseout( event ){
     event.target.style.opacity = '50%';
 }
 
 
-
-//
 //when the charge button is clicked, the rocket charges
 chargeButton.addEventListener('click', chargeRocket);
 //when the reset button is clicked, a new rocket flies in 
@@ -108,6 +117,7 @@ for (thumbElement of thumbs){
     thumbElement.addEventListener('mouseover', thumbMouseover);
     thumbElement.addEventListener('mouseout', thumbMouseout);
 }
+
 
 //put focus on first thumbnail
 currentThumb.style.border = '3px solid hsl(240, 30%, 30%)';
