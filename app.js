@@ -1,4 +1,5 @@
-const chargeButton = document.getElementById('charge-button');
+//rocket elements
+const rocketInstructions = document.getElementById('rocket-instructions');
 const resetButton = document.getElementById('reset-button');
 const progressbar = document.getElementById('progress-bar');
 const progressElement = document.getElementById('progress');
@@ -24,21 +25,23 @@ const img5Path = "./resources/mars.jpg";
 
 const imgPaths = [img1Path, img2Path, img3Path, img4Path, img5Path];
 
-//current thumbnail image is the first one
-let currentThumb = thumb1;
-//current image path is the first one
-let currentImgPath = img1Path;
 
-let progressPercent = 0;
-let evenIteration = true;
+let currentThumb = thumb1; //current thumbnail image is the first one
+let currentImgPath = img1Path; //current image path is the first one
+
+let progressPercent = 0; //Rocket charge percentage
+
+let evenIteration = true; //Used for animations that need to be activated multiple times
 
 
 //charges rocket by 10% until it gets to 100%, then launches rocket
 function chargeRocket(){
-    //reset animation style
-    rocket.style.animation = 'none';
+
+    rocketInstructions.style.display = 'none'; //make rocket instructions disappear
+
     progressPercent += 10;
-    progressElement.style.width = `${progressPercent}%`;
+    progressElement.style.width = `${progressPercent}%`; 
+
     //shake rocket a few times, alternate shake animation every time we charge rocket
     if (evenIteration === true){
         rocket.style.animation = `shake 0.1s linear 5 alternate`;
@@ -47,15 +50,17 @@ function chargeRocket(){
         rocket.style.animation = `shake2 0.1s linear 5 alternate`;
         evenIteration = true;
     }
-    
 
     if (progressPercent === 100){ //launch rocket at 100%
-        rocket.style.animation = 'flyaway 1s ease-in 0.6s forwards, shake2 0.1s linear 5 alternate';
-        //switch out the buttons
-        resetButton.style.display = 'block';
-        chargeButton.style.display = 'none';
-    }
+        rocket.removeEventListener('click', chargeRocket); //prevent overcharging of rocket
 
+        progressElement.style.backgroundColor = 'hsl(20, 100%, 60%)'; //change progress bar color to orange
+        rocket.style.animation = 'flyaway 1s ease-in 0.6s forwards, shake2 0.1s linear 5 alternate';
+        //display reset button 2.5s after animation starts
+        setTimeout( () => {
+            resetButton.style.display = 'block';
+        }, 2500);
+    }
 
 }
 
@@ -64,10 +69,12 @@ function chargeRocket(){
 function resetRocket(){
     progressPercent = 0;
     progressElement.style.width = `${progressPercent}%`;
+    progressElement.style.backgroundColor = 'blueviolet';
     rocket.style.animation = `flyin 2s ease-out forwards`;
-    //switch out the buttons
-    resetButton.style.display = 'none';
-    chargeButton.style.display = 'block';
+    rocket.addEventListener('click', chargeRocket);
+    
+    resetButton.style.display = 'none'; //hide reset button
+    rocketInstructions.style.display = 'block'; //display rocket instructions again
 }
 
 //activates on click on thumbnails, changes image displayed behind rocket
@@ -106,8 +113,8 @@ function thumbMouseout( event ){
 }
 
 
-//when the charge button is clicked, the rocket charges
-chargeButton.addEventListener('click', chargeRocket);
+//when the rocket is clicked, the rocket charges
+rocket.addEventListener('click', chargeRocket);
 //when the reset button is clicked, a new rocket flies in 
 resetButton.addEventListener('click', resetRocket);
 
